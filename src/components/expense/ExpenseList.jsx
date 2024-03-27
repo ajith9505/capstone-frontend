@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { setEditExpense, toggleEdit } from "./editExpenseSlice"
 import { fetchData } from "../../components/auth/Welcome"
-import Dashboard from "../../components/Dashboard"
 
 const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, setShowAddMoney, dispatch, setError, setIsLoading, { setSubmitting, resetForm }) => {
 
@@ -80,7 +79,7 @@ const ExpenseList = () => {
   const data = useSelector(state => state.expense)
   const currentBalance = data.currentBalance
 
-  if (isLoading) return <Dashboard>Loading...</Dashboard>;
+  if (isLoading) return <p>Loading...</p>;
 
   if (error) return <p>Error: {error}</p>;
 
