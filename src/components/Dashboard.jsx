@@ -11,7 +11,7 @@ const Dashboard = () => {
             <div className="dash-container">
                 <Outlet />
             </div>
-            <DashFooter />
+            {/* <DashFooter /> */}
         </>
     )
 }
