@@ -82,7 +82,7 @@ const Welcome = () => {
     if (error) return <p>Error: {error}</p>
 
     return (
-        <section className='welcome'>
+        <div className='welcome'>
             <div className='d-flex flex-column text-center'>
                 <div className="w-100 flex-flow-1 text-dark">
                     <div className="row">
@@ -164,7 +164,7 @@ const Welcome = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     )
 
 }
