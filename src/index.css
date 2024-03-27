@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box
+}
+
+/* || VARIABLES */
+
+:root {
+  /* COLORS */
+  --BGCOLOR: #515250;
+  --BORDER-COLOR: #FFF;
+  --COLOR: #FFF;
+  --ERROR: firebrick;
+  --INACTIVE: lightgray;
+  --LINK-COLOR: whitesmoke;
+  --LINK-HOVER: rgba(245, 245, 245, 0.9);
+  --NOTE-BGCOLOR: hsla(34, 87%, 59%, 0.65);
+  --STATUS-COMPLETE: limegreen;
+  --STATUS-OPEN: firebrick;
+  --TABLE-BGCOLOR: #FFF;
+  --TABLE-COLOR: #000;
+}
+
+/* || UTILITY CLASSES */
+.errmsg {
+  display: inline-block;
+  background-color: var(--TABLE-BGCOLOR);
+  color: var(--ERROR);
+  padding: 0.25em;
+  margin-bottom: 0.5em;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.icon-button {
+  width: 48px;
+  height: 48px;
+  font-size: 2.5rem;
+  background-color: transparent;
+  border: none;
+  color: var(--COLOR);
+  display: grid;
+  place-content: center;
+}
+
+.icon-button:hover,
+.icon-button:focus-visible {
+  transform: scale(1.2);
+}
+
+.icon-button[disabled] {
+  visibility: hidden;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  margin: 0;
+  padding-bottom: 100px; 
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #455d7a;
+  color: var(--COLOR);
+  background-image: url('./assets/img1.jpg');
+  background-size: cover;
+  background-position: top right;
+  background-blend-mode: multiply;
+}
+
+/* public page style */
+.public-container {
+  padding: 7rem 0;
+  text-align: center;
+  color: rgb(190, 235, 241);
+  margin-bottom: 1rem;
+}
+
+.public-container p {
+  line-height: 1.5;
+  padding: 3rem 0;
+  color: rgb(220, 238, 213);
+}
+
+.public-container .link-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5rem;
+}
+
+
+.public-container .link-container .link a {
+  color: cadetblue;
+  font-size: x-large;
+  text-decoration: none;
+  background-color: var(--LINK-COLOR);
+}
+
+.public-container .link-container .link a:hover {
+  background-color: var(--LINK-HOVER);
+}
+
+.public-container #login {
+  padding: 20px 60px;
+}
+
+.public-container #register {
+  padding: 20px 40px;
+}
+
+/* dash header style */
+.dash-header {
+  justify-content: center;
+  align-items: center;
+  background-color: #ffb6b9;
+}
+
+.dash-header .title-container {
+  flex: 3;
+  padding: 15px 5px;
+  color: var(--COLOR);
+  display: inline-block;
+}
+
+.dash-header .icon-container {
+  flex: 1;
+}
+
+.dash-header .icon-container button {
+  border: 0px;
+  background-color: #ffb6b9;
+}
