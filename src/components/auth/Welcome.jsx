@@ -83,8 +83,8 @@ const Welcome = () => {
 
     return (
         <section className='welcome'>
-            <div className='col  text-center'>
-                <div className="w-100 align-item-center text-dark">
+            <div className='d-flex flex-column text-center'>
+                <div className="w-100 flex-flow-1 text-dark">
                     <div className="row">
                         <div className="col-12 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#fce38a' }}>
                             <p>{today}</p>
@@ -103,8 +103,8 @@ const Welcome = () => {
                     </div>
                 </div>
 
-                <div className="row mx-5" style={{marginTop:"10rem"}}>
-                    <div className="col-12 col-lg-6 col-xl-6 col-xxl-6">
+                <div className="row flex-flow-1" style={{marginTop:"10rem"}}>
+                    <div className="col-12 col-lg-6 col-xl-6 col-xxl-6 mb-5">
                         <div className="card" style={{ backgroundColor: '#fff46e' }}>
                             <div className="card-body">
                                 <h5 className="card-title">
