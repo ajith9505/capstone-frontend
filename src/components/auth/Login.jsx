@@ -48,7 +48,7 @@ const [isloading, setIsLoading] = useState(false)
     }
   }
 
-  // if (isloading) return <p>Loading...</p>
+  if (isloading) return <p>Loading...</p>
 
   return (
     <Formik

@@ -82,10 +82,10 @@ const Welcome = () => {
     if (error) return <p>Error: {error}</p>
 
     return (
-        <div className='welcome'>
-            <div className='d-flex flex-column text-center'>
-                <div className="w-100 flex-flow-1 text-dark">
-                    <div className="row">
+        <div className='welcome position-relative'>
+            <div className='d-flex flex-column align-items-center text-center'>
+                <div className="text-dark">
+                    <div className="row"  style={{width: '100%'}}>
                         <div className="col-12 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#fce38a' }}>
                             <p>{today}</p>
                         </div>
