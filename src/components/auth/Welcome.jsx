@@ -84,15 +84,15 @@ const Welcome = () => {
     return (
         <div className='welcome position-relative'>
             <div className='d-flex flex-column align-items-center text-center'>
-                <div className="text-dark">
-                    <div className="row"  style={{width: '100%'}}>
-                        <div className="col-12 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#fce38a' }}>
+                <div className="text-dark" style={{width: '100%'}}>
+                    <div className="row"  style={{width: '100%', marginLeft: '1px'}}>
+                        <div className="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#fce38a' }}>
                             <p>{today}</p>
                         </div>
-                        <div className="col-12 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#eaffd0' }}>
+                        <div className="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#eaffd0' }}>
                             <p><Link className='text-dark text-decoration-none' to="/dash/expense">View Expenses</Link></p>
                         </div>
-                        <div className="col-12 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#95e1d3' }}>
+                        <div className="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#95e1d3' }}>
                             <button className='border-0' style={{ backgroundColor: '#95e1d3' }} onClick={() => {
                                 dispatch(toggleEdit({ data: false }))
                                 navigateTo('/dash/expense-form')
@@ -103,7 +103,7 @@ const Welcome = () => {
                     </div>
                 </div>
 
-                <div className="row flex-flow-1" style={{marginTop:"10rem"}}>
+                <div className="row w-100" style={{marginTop:"10rem"}}>
                     <div className="col-12 col-lg-6 col-xl-6 col-xxl-6 mb-5">
                         <div className="card" style={{ backgroundColor: '#fff46e' }}>
                             <div className="card-body">
@@ -149,7 +149,7 @@ const Welcome = () => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <div className="col-12 col-lg-6 col-xl-6 col-xxl-6 mb-5">
                         <div className="card" style={{ backgroundColor: '#fff46e' }}>
                             <div className="card-body">
                                 <h5 className="card-title">

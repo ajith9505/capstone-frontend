@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOut } from '@fortawesome/free-solid-svg-icons'
+import { faSignOut, faHome } from '@fortawesome/free-solid-svg-icons'
 import { logOut } from './auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -25,12 +25,15 @@ const DashHeader = () => {
 
     return (
         <header className='dash-header d-flex'>
-            <div className='title-container'>
-                <h1 className='title'>Pettycash Manager</h1>
+            <div className='title-container d-flex align-items-center'>
+            <button className='icon-button border-0 me-4 btn-outline ms-2 pb-2' style={{backgroundColor: '#ffb6b9'}} onClick={() => navigateTo('/dash')} >
+                    <FontAwesomeIcon icon={faHome} />
+                </button>
+                <h4 className='title'>Pettycash Manager</h4>
             </div>
             <div className='icon-container d-flex justify-content-end pe-5'>
-                <h5 className='me-3'>Welcome {name}</h5>
-                <button onClick={() => logout(navigateTo, dispatch)} >
+                <h5 className='me-3 pt-3'>{name}</h5>
+                <button className='icon-button' onClick={() => logout(navigateTo, dispatch)} >
                     <FontAwesomeIcon icon={faSignOut} />
                 </button>
             </div>

@@ -6,35 +6,21 @@
   box-sizing: border-box
 }
 
-/* || VARIABLES */
-
-:root {
-  /* COLORS */
-  --BGCOLOR: #515250;
-  --BORDER-COLOR: #FFF;
-  --COLOR: #FFF;
-  --ERROR: firebrick;
-  --INACTIVE: lightgray;
-  --LINK-COLOR: whitesmoke;
-  --LINK-HOVER: rgba(245, 245, 245, 0.9);
-  --NOTE-BGCOLOR: hsla(34, 87%, 59%, 0.65);
-  --STATUS-COMPLETE: limegreen;
-  --STATUS-OPEN: firebrick;
-  --TABLE-BGCOLOR: #FFF;
-  --TABLE-COLOR: #000;
+html{
+  margin:0;
+  min-height: 100vh;
 }
 
-/* || UTILITY CLASSES */
-.errmsg {
-  display: inline-block;
-  background-color: var(--TABLE-BGCOLOR);
-  color: var(--ERROR);
-  padding: 0.25em;
-  margin-bottom: 0.5em;
-}
-
-.nowrap {
-  white-space: nowrap;
+body {
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  margin:0;
+  height: 100%;
+  background-color: #455d7a;
+  background-image: url('./assets/img1.jpg');
+  background-size: cover;
+  background-position: top right;
+  background-blend-mode: multiply;
 }
 
 .icon-button {
@@ -43,7 +29,7 @@
   font-size: 2.5rem;
   background-color: transparent;
   border: none;
-  color: var(--COLOR);
+  color: #FFF;
   display: grid;
   place-content: center;
 }
@@ -58,24 +44,8 @@
 }
 
 footer {
-  position: absolute;
   bottom: 0;
   height: 100px;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  position: relative;
-  margin: 0;
-  padding-bottom: 100px; 
-  box-sizing: border-box;
-  min-height: 100vh;
-  background-color: #455d7a;
-  color: var(--COLOR);
-  background-image: url('./assets/img1.jpg');
-  background-size: cover;
-  background-position: top right;
-  background-blend-mode: multiply;
 }
 
 /* public page style */
@@ -100,17 +70,6 @@ body {
 }
 
 
-.public-container .link-container .link a {
-  color: cadetblue;
-  font-size: x-large;
-  text-decoration: none;
-  background-color: var(--LINK-COLOR);
-}
-
-.public-container .link-container .link a:hover {
-  background-color: var(--LINK-HOVER);
-}
-
 .public-container #login {
   padding: 20px 60px;
 }
@@ -129,7 +88,7 @@ body {
 .dash-header .title-container {
   flex: 3;
   padding: 15px 5px;
-  color: var(--COLOR);
+  color: #FFF;
   display: inline-block;
 }
 
