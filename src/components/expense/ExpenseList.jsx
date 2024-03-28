@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { setEditExpense, toggleEdit } from "./editExpenseSlice"
 import { fetchData } from "../../components/auth/Welcome"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, setShowAddMoney, dispatch, setError, setIsLoading, { setSubmitting, resetForm }) => {
 
@@ -139,8 +141,8 @@ const ExpenseList = () => {
                               <td>
                                 <button className='btn btn-primary p-1 '
                                   onClick={() => handleEdit(exp, dispatch, navigateTo)}
-                                  style={{ fontSize: '14px' }}><i className="bi bi-pen"></i> Edit</button>
-                                <button className='btn btn-danger p-1 ms-2 ' type="button" onClick={() => deleteRow(userId, exp._id, axiosPrivate, dispatch, setError, setIsLoading)} style={{ fontSize: '14px' }}><i className="bi bi-trash"></i> Delete</button>
+                                  style={{ fontSize: '14px' }}><i className="bi bi-pen"></i><FontAwesomeIcon icon={faPen} /> Edit</button>
+                                <button className='btn btn-danger p-1 ms-2 ' type="button" onClick={() => deleteRow(userId, exp._id, axiosPrivate, dispatch, setError, setIsLoading)} style={{ fontSize: '14px' }}><i className="bi bi-trash"></i><FontAwesomeIcon icon={faTrash} /> Delete</button>
                               </td>
                             </tr>
                           ))}

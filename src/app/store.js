@@ -9,5 +9,5 @@ export const store = configureStore({
         expense: expensListReducer,
         editExpense: editExpenseReducer
     },
-    devTools: true
+    devTools: false
 })

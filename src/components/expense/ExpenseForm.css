@@ -11,9 +11,13 @@
     /* color: #fff; */
 }
 
+.container{
+    width: 100%;
+}
+
 .form-input-box {
     background: #fae3d9;
-    width: 500px;
+    width: 700px;
     box-sizing: border-box;
     padding: 10px;
     border-radius: 10px;
@@ -97,7 +101,7 @@
     }
 
     .row {
-        max-width: 420px;
+        max-width: 700px;
         width: 100%;
     }
 }
