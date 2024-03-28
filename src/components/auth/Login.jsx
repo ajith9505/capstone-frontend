@@ -84,7 +84,7 @@ const [isloading, setIsLoading] = useState(false)
                   <input type="submit" disabled={isSubmitting} className="submit" value="Login" />
                 </div>
                 <div className="link">
-                  <span>New user? <Link to="/register">Register here</Link></span>
+                  <span>New user? <Link className='text-primary' to="/register">Register here</Link></span>
                 </div>
               </div>
             </div>

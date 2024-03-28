@@ -103,55 +103,51 @@ const ExpenseList = () => {
     </div>)
 
   const table = (
-    <div className="mx-2">
-      {/* Table for show list */}
-      <div className="bg-image">
-        <div className="mask d-flex align-items-center">
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-12">
-                <div className="card">
-                  <div className="card-body p-0">
-                    <div className="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style={{ position: 'relative' }}>
-                      {data?.message ?
-                        <h2>{data.message}</h2> :
-                        <table className="table table-striped mb-0">
-                          <thead>
-                            <tr style={{ backgroundColor: "#ffeaa5" }}>
-                              <th scope="col">S.NO</th>
-                              <th scope="col">Date</th>
-                              <th scope="col">Paid To</th>
-                              <th scope="col">Paid For</th>
-                              <th scope="col">Amount</th>
-                              <th scope="col">Description</th>
-                              <th scope="col">Balance</th>
-                              <th scope="col">Actions</th>
+      <div className="mask d-flex align-items-center mt-2">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-body p-0">
+                  <div className="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style={{ position: 'relative', height: '700px' }}>
+                    {data?.message ?
+                      <h2>{data.message}</h2> :
+                      <table className="table table-striped mb-0">
+                        <thead>
+                          <tr style={{ backgroundColor: "#ffeaa5" }}>
+                            <th scope="col">S.NO</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Paid To</th>
+                            <th scope="col">Paid For</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {/* Creating row for each element */}
+                          {data?.data?.map((exp, index) => (
+                            <tr key={exp._id}>
+                              <td>{index + 1}</td>
+                              <td>{exp.date}</td>
+                              <td>{exp.paidTo}</td>
+                              <td>{exp.paidFor}</td>
+                              <td>{exp.amount}</td>
+                              <td>{exp.description}</td>
+                              <td>{exp.balance}</td>
+                              <td>
+                                <button className='btn btn-primary p-1 '
+                                  onClick={() => handleEdit(exp, dispatch, navigateTo)}
+                                  style={{ fontSize: '14px' }}><i className="bi bi-pen"></i> Edit</button>
+                                <button className='btn btn-danger p-1 ms-2 ' type="button" onClick={() => deleteRow(userId, exp._id, axiosPrivate, dispatch, setError, setIsLoading)} style={{ fontSize: '14px' }}><i className="bi bi-trash"></i> Delete</button>
+                              </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {/* Creating row for each element */}
-                            {data?.data?.map((exp, index) => (
-                              <tr key={exp._id}>
-                                <td>{index + 1}</td>
-                                <td>{exp.date}</td>
-                                <td>{exp.paidTo}</td>
-                                <td>{exp.paidFor}</td>
-                                <td>{exp.amount}</td>
-                                <td>{exp.description}</td>
-                                <td>{exp.balance}</td>
-                                <td>
-                                  <button className='btn btn-primary p-1 '
-                                    onClick={() => handleEdit(exp, dispatch, navigateTo)}
-                                    style={{ fontSize: '14px' }}><i className="bi bi-pen"></i> Edit</button>
-                                  <button className='btn btn-danger p-1 ms-2 ' type="button" onClick={() => deleteRow(userId, exp._id, axiosPrivate, dispatch, setError, setIsLoading)} style={{ fontSize: '14px' }}><i className="bi bi-trash"></i> Delete</button>
-                                </td>
-                              </tr>
-                            ))}
+                          ))}
 
-                          </tbody>
-                        </table>
-                      }
-                    </div>
+                        </tbody>
+                      </table>
+                    }
                   </div>
                 </div>
               </div>
@@ -159,7 +155,6 @@ const ExpenseList = () => {
           </div>
         </div>
       </div>
-    </div>
   )
 
   if (isLoading) return <p>Loading...</p>;

@@ -3,7 +3,7 @@ import Layout from "./components/Layout"
 import Public from "./components/Public"
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
-import Dashboard from "./components/Dashboard"
+import DashLayout from "./components/DashLayout"
 import Welcome from "./components/auth/Welcome"
 import ExpenseList from "./components/expense/ExpenseList"
 import ExpenseForm from "./components/expense/ExpenseForm"
@@ -23,7 +23,7 @@ function App() {
 
         {/* protected routes */}
         <Route element={<RequireAuth />}>
-          <Route path="dash" element={<Dashboard />}>
+          <Route path="dash" element={<DashLayout />}>
             <Route index element={<Welcome />} />
             <Route path="expense-form" element={<ExpenseForm />} />
             <Route path="expense">

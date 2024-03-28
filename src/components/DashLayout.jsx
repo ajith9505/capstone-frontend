@@ -4,16 +4,16 @@ import DashFooter from "./DashFooter";
 
 import React from 'react'
 
-const Dashboard = () => {
+const DashLayout = () => {
     return (
         <>
             <DashHeader />
             <div className="dash-container">
                 <Outlet />
             </div>
-            {/* <DashFooter /> */}
+            <DashFooter />
         </>
     )
 }
 
-export default Dashboard
+export default DashLayout

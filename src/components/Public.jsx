@@ -14,10 +14,10 @@ const Public = () => {
       </div>
 
       <div className="link-container">
-        <div className="link me-2">
+        <div className="btn btn-outline-info link me-2">
           <Link id="login" to='login'>Login</Link>
         </div>
-        <div className="link ms-2">
+        <div className="btn btn-outline-info link ms-2">
           <Link id="register" to='register'>Register</Link>
         </div>
       </div>

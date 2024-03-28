@@ -6,6 +6,7 @@ body,
 
 table td,
 table th {
+  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -24,7 +25,7 @@ thead th {
 }
 
 .table-scroll table thead th {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 thead {
   top: 0;

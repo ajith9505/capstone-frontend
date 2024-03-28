@@ -93,7 +93,7 @@ const Register = () => {
                                     <Field type="submit" className="submit" disabled={isSubmitting} value="Signup" />
                                 </div>
                                 <div className="link">
-                                    <span>Already have an account? <Link to={'/login'}>Login here</Link></span>
+                                    <span>Already have an account? <Link className='text-primary' to={'/login'}>Login here</Link></span>
                                 </div>
                             </div>
                         </div>
