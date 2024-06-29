@@ -7,6 +7,7 @@ import axios from '../../api/axios'
 
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
+import { setExpense } from '../expense/expensListSlice'
 
 // Validation Schema using yup
 const LoginSchema = Yup.object().shape({
@@ -20,8 +21,6 @@ const LoginSchema = Yup.object().shape({
 
 const Login = () => {
 
-const [isloading, setIsLoading] = useState(false)
-
   const navigateTo = useNavigate();
 
   const dispatch = useDispatch();
@@ -29,7 +28,8 @@ const [isloading, setIsLoading] = useState(false)
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
 
     try {
-      setIsLoading(true)
+      // setIsLoading(true)
+      // dispatch(setExpense({loading: true}))
       const response = await axios.post('/auth/login',
         JSON.stringify({ ...values }), {
         headers: { 'Content-Type': 'application/json' },
@@ -38,17 +38,17 @@ const [isloading, setIsLoading] = useState(false)
       localStorage.setItem('accessToken', response.data.accessToken);
       const accessToken = response.data.accessToken;
       dispatch(setCredentials({ ...values, accessToken }));
-      setIsLoading(false)
       navigateTo('/dash')
+      // dispatch(setExpense({loading: false}))
 
     } catch (err) {
-      setIsLoading(false)
+      // setIsLoading(false)
+      // dispatch(setExpense({loading: false}))
       setSubmitting(false);
       setFieldError(err.response.data.message == 'User not found' ? 'email' : 'password', err.response.data.message);
     }
   }
 
-  if (isloading) return <p>Loading...</p>
 
   return (
     <Formik

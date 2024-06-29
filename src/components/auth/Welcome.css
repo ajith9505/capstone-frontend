@@ -1,0 +1,10 @@
+.pie-chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-image: conic-gradient(
+      red 0% 30%,
+      green 30% 60%,
+      blue 60% 100%
+    );
+  }

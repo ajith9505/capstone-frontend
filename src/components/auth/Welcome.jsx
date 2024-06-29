@@ -2,29 +2,34 @@ import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
+import './Welcome.css'
 
 import { toggleEdit } from '../../components/expense/editExpenseSlice'
 import { setExpense } from '../../components/expense/expensListSlice'
+import { setLoading } from '../../loadingSlice'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 
-export const fetchData = async (axiosPrivate, dispatch, setError, setIsLoading) => {
+export const fetchData = async (axiosPrivate, dispatch) => {
     try {
+        dispatch(setLoading({ loading: true }))
         const response = await axiosPrivate({
             url: '/expense',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         })
-        dispatch(setExpense(response.data))
+        dispatch(setExpense({ ...response.data }))
     }
     catch (error) {
-        setError(error.message)
+        console.log(error)
+        // setError(error.message)
     }
     finally {
-        setIsLoading(false)
+        dispatch(setLoading({ loading: false }))
     }
+
 }
 
-const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, setShowAddMoney, dispatch, setError, setIsLoading, { setSubmitting, resetForm }) => {
+const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, setShowAddMoney, dispatch, { setSubmitting, resetForm }) => {
 
     try {
         const response = await axiosPrivate({
@@ -38,10 +43,10 @@ const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, se
         setSubmitting(false)
         resetForm()
         setShowAddMoney(!showAddMoney)
-        fetchData(axiosPrivate, dispatch, setError, setIsLoading)
+        fetchData(axiosPrivate, dispatch)
     }
     catch (error) {
-        setError(error.message)
+        // setError(error.message)
         setSubmitting(false);
     }
 }
@@ -49,8 +54,6 @@ const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, se
 
 const Welcome = () => {
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
     const [showAddMoney, setShowAddMoney] = useState(false)
 
     const dispatch = useDispatch()
@@ -64,12 +67,15 @@ const Welcome = () => {
     })
         .format(date)
 
-    useEffect(() => {
-        fetchData(axiosPrivate, dispatch, setError, setIsLoading)
-    }, []);
-
     const data = useSelector(state => state.expense)
+
+    useEffect(() => {
+        fetchData(axiosPrivate, dispatch)
+        // dispatch(setExpense({loading: false}))
+    }, [fetchData]);
+
     const currentBalance = data.currentBalance
+    console.log(data);
 
 
     let spendings = 0
@@ -101,9 +107,9 @@ const Welcome = () => {
         if (expense.paidFor == 'Miscellaneous expenses') return miscellaneous += expense.amount
     })
 
-    if (isLoading) return <p>Loading...</p>
+    // if (isLoading) return <p id='loading'>Loading...</p>
 
-    if (error) return <p>Error: {error}</p>
+    // if (error) return <p>Error: {error}</p>
 
     return (
         <div className='welcome position-relative'>
@@ -114,7 +120,7 @@ const Welcome = () => {
                             <p className='text-dark'>{today}</p>
                         </div>
                         <div className="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#eaffd0' }}>
-                            <p><Link className='text-dark text-decoration-none' to="/dash/expense">View Expenses</Link></p>
+                            <p><Link onClick={() => dispatch(setLoading({ loading: true }))} className='text-dark text-decoration-none' to="/dash/expense">View Expenses</Link></p>
                         </div>
                         <div className="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 pt-3" style={{ backgroundColor: '#95e1d3' }}>
                             <button className='border-0' style={{ backgroundColor: '#95e1d3' }} onClick={() => {
@@ -126,6 +132,10 @@ const Welcome = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* <div className="pie-chart">
+
+                </div> */}
 
                 <div className="row w-100" style={{ marginTop: "5rem" }}>
                     <div className="col-12 col-lg-6 col-xl-6 col-xxl-6 mb-5">
@@ -152,12 +162,12 @@ const Welcome = () => {
                                     >
                                         {({ isSubmitting }) => (
                                             <Form>
-                                                <div className="d-flex">
+                                                <div className="d-flex justify-content-center">
                                                     <div>
-                                                        <Field type="text" name="amount" className="form-control" />
+                                                        <Field type="text" name="amount" className="form-control bg-warm" />
                                                     </div>
                                                     <div className=" ms-2">
-                                                        <button type="submit" className="btn btn-primary btn-block" disabled={isSubmitting}>
+                                                        <button type="submit" className="btn btn-primary btn-block px-4" disabled={isSubmitting}>
                                                             Add
                                                         </button>
                                                         <button type="submit" className="btn btn-danger btn-block ms-2" onClick={() => setShowAddMoney(!showAddMoney)}>
@@ -213,7 +223,6 @@ const Welcome = () => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

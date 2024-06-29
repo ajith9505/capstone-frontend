@@ -9,8 +9,9 @@ import { setEditExpense, toggleEdit } from "./editExpenseSlice"
 import { fetchData } from "../../components/auth/Welcome"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { setExpense } from "./expensListSlice"
 
-const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, setShowAddMoney, dispatch, setError, setIsLoading, { setSubmitting, resetForm }) => {
+const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, setShowAddMoney, dispatch, { setSubmitting, resetForm }) => {
 
   try {
     const response = await axiosPrivate({
@@ -24,10 +25,10 @@ const addBalance = async (values, axiosPrivate, currentBalance, showAddMoney, se
     setSubmitting(false)
     resetForm()
     setShowAddMoney(!showAddMoney)
-    fetchData(axiosPrivate, dispatch, setError, setIsLoading)
+    fetchData(axiosPrivate, dispatch)
   }
   catch (error) {
-    setError(error.message)
+    // setError(error.message)
     setSubmitting(false);
   }
 }
@@ -39,7 +40,7 @@ const handleEdit = (data, dispatch, navigateTo) => {
 }
 
 //delete specified row
-const deleteRow = async (userId, rowId, axiosPrivate, dispatch, setError, setIsLoading) => {
+const deleteRow = async (userId, rowId, axiosPrivate, dispatch) => {
   try {
     axiosPrivate({
       method: 'DELETE',
@@ -49,7 +50,7 @@ const deleteRow = async (userId, rowId, axiosPrivate, dispatch, setError, setIsL
       },
       data: JSON.stringify({ userId, rowId })
     })
-    fetchData(axiosPrivate, dispatch, setError, setIsLoading)
+    fetchData(axiosPrivate, dispatch)
   }
   catch (error) {
     setError(error.message)
@@ -57,8 +58,6 @@ const deleteRow = async (userId, rowId, axiosPrivate, dispatch, setError, setIsL
 }
 
 const ExpenseList = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [showAddMoney, setShowAddMoney] = useState(false)
 
   const axiosPrivate = useAxiosPrivate()
@@ -68,7 +67,7 @@ const ExpenseList = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchData(axiosPrivate, dispatch, setError, setIsLoading)
+    fetchData(axiosPrivate, dispatch)
   }, []);
 
   const token = localStorage.getItem("accessToken");
@@ -105,86 +104,76 @@ const ExpenseList = () => {
     </div>)
 
   const table = (
-      <div className="mask d-flex align-items-center mt-2">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-body p-0">
-                  <div className="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style={{ position: 'relative', height: '700px' }}>
-                    {data?.message ?
-                      <h2>{data.message}</h2> :
-                      <table className="table table-striped mb-0">
-                        <thead>
-                          <tr style={{ backgroundColor: "#ffeaa5" }}>
-                            <th scope="col">S.NO</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Paid To</th>
-                            <th scope="col">Paid For</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Balance</th>
-                            <th scope="col">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {/* Creating row for each element */}
-                          {data?.data?.map((exp, index) => (
-                            <tr key={exp._id}>
-                              <td>{index + 1}</td>
-                              <td>{exp.date}</td>
-                              <td>{exp.paidTo}</td>
-                              <td>{exp.paidFor}</td>
-                              <td>{exp.amount}</td>
-                              <td>{exp.description}</td>
-                              <td>{exp.balance}</td>
-                              <td>
-                                <button className='btn btn-primary p-1 '
-                                  onClick={() => handleEdit(exp, dispatch, navigateTo)}
-                                  style={{ fontSize: '14px' }}><i className="bi bi-pen"></i><FontAwesomeIcon icon={faPen} /> Edit</button>
-                                <button className='btn btn-danger p-1 ms-2 ' type="button" onClick={() => deleteRow(userId, exp._id, axiosPrivate, dispatch, setError, setIsLoading)} style={{ fontSize: '14px' }}><i className="bi bi-trash"></i><FontAwesomeIcon icon={faTrash} /> Delete</button>
-                              </td>
-                            </tr>
-                          ))}
+    <div id="table-container" className="d-flex align-items-center mt-2">
+      <div className="container">
+        {/* <div className="row justify-content-center"> */}
+        <div className="col-12 ">
+          {/* <div className="card">
+              <div className="card-body p-0"> */}
+          <div className="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" >
+            {data?.message ?
+              <h2>{data.message}</h2> :
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">S.NO</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Paid To</th>
+                    <th scope="col">Paid For</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Balance</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Creating row for each element */}
+                  {data?.data?.map((exp, index) => (
+                    <tr key={exp._id} className={index !== 0 && index % 2 !== 0 ? 'even-row' : 'odd-row'}>
+                      <td>{index + 1}</td>
+                      <td>{exp.date}</td>
+                      <td>{exp.paidTo}</td>
+                      <td>{exp.paidFor}</td>
+                      <td>{exp.amount}</td>
+                      <td>{exp.description}</td>
+                      <td>{exp.balance}</td>
+                      <td>
+                        <button className='btn btn-primary px-3 py-1'
+                          onClick={() => handleEdit(exp, dispatch, navigateTo)}
+                          style={{ fontSize: '14px' }}><i className="bi bi-pen"></i><FontAwesomeIcon icon={faPen} /> Edit</button>
+                        <button className='btn btn-danger p-1 ms-2 ' type="button" onClick={() => deleteRow(userId, exp._id, axiosPrivate, dispatch, setError, setIsLoading)} style={{ fontSize: '14px' }}><i className="bi bi-trash"></i><FontAwesomeIcon icon={faTrash} /> Delete</button>
+                      </td>
+                    </tr>
+                  ))}
 
-                        </tbody>
-                      </table>
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
+                </tbody>
+              </table>
+            }
           </div>
         </div>
       </div>
+    </div>
+    //     </div>
+    //   </div>
+    // </div>
   )
 
-  if (isLoading) return <p>Loading...</p>;
-
-  if (error) return <p>Error: {error}</p>;
-
   return (
-    <div className="">
-      <div className="d-flex mt-3 align-items-center">
-        {(!showAddMoney) ? <div className="p-2 flex-fill text-light">Current Balance: {data?.currentBalance} Rs</div> : null}
-        <div className="p-2 d-flex justify-content-end flex-fill">
-          <div className="mb-2">
-            <section>
-              {(!showAddMoney) ?
-                <div>
-                  <button className="btn btn-outline me-1 "
-                    style={{ backgroundColor: '#bff4ed' }}
-                    onClick={() => {
-                      dispatch(toggleEdit({ data: false }))
-                      navigateTo('/dash/expense-form')
-                    }}>Add Expense</button>
-                  <button
-                    className="btn btn-outline me-1 "
-                    style={{ backgroundColor: '#d4abdc' }}
-                    onClick={() => setShowAddMoney(!showAddMoney)}>Add Money</button>
-                </div> : null}
-            </section>
-          </div>
+    <div className="vh-100">
+      <div id="info-container">
+        {(!showAddMoney) ? <div id="balance" className="p-2 flex-fill text-light">Current Balance: {data?.currentBalance}₹</div> : null}
+        <div className="e-btn">
+          {(!showAddMoney) ?
+            <div>
+              <button className="add-expense-btn btn btn-outline me-1 "
+                onClick={() => {
+                  dispatch(toggleEdit({ data: false }))
+                  navigateTo('/dash/expense-form')
+                }}>Add Expense</button>
+              <button
+                className="add-money-btn btn btn-outline me-1 "
+                onClick={() => setShowAddMoney(!showAddMoney)}>Add Money</button>
+            </div> : null}
         </div>
         {showAddMoney ? addBalanceForm : null}
       </div>

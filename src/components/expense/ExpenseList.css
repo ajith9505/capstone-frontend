@@ -9,6 +9,7 @@ table th {
 
 thead th {
   color: #fff;
+  font-size: 24px;
 }
 
 .card {
@@ -20,9 +21,69 @@ thead th {
 }
 
 .table-scroll table thead th {
-  font-size: 1rem;
+  font-size: 1.3rem;
+  padding: 1rem;
+  background: rgba(61, 154, 159, 0.755);
 }
 thead {
   top: 0;
   position: sticky;
+}
+tbody{
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.odd-row td{
+  background: rgba(95, 57, 52, 0.4);
+  color: #fff;
+}
+
+.even-row td{
+  background: rgba(52, 95, 65, 0.303);
+  color: #fff;
+}
+
+#info-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.e-btn{
+  margin: 10px 0px;
+  padding: 0px 10px;
+}
+
+#balance{
+  font-weight: 600;
+}
+
+.e-btn button{
+  color:#fff;
+  background: rgba(103, 187, 163, 0.3);
+  transition: 0.3s ease-in-out;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+
+.e-btn button:hover{
+  color:#fff;
+  background: rgba(103, 187, 163, 0.8);
+}
+
+@media screen and (max-width: 764px){
+  #table-container{
+    padding-left: 1.5rem;
+  }
+  .e-btn{
+    display: flex;
+    flex-direction: row;
+  }
+  #info-container{
+    display: flex;
+    flex-direction: column;
+  }
 }

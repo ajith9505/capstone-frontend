@@ -5,7 +5,7 @@ const expenseListSlice = createSlice({
     initialState: { data : null, currentBalance: null, message: null },
     reducers: {
         setExpense: (state, action) => {
-            const { data, currentBalance, message } = action.payload
+            const { data, currentBalance, message, loading } = action.payload
             state.data = data
             state.currentBalance = currentBalance
             state.message = message
